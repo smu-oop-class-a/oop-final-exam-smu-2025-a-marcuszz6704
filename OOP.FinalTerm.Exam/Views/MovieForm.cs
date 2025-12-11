@@ -82,7 +82,6 @@
                     _selectedImagePath = openFileDialog.FileName;
                     txtCover.Text = Path.GetFileName(_selectedImagePath);
 
-                    // Convert image to base64 immediately
                     if (_movie.SetCoverFromFile(_selectedImagePath))
                     {
                         MessageBox.Show("✓ Image loaded successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);

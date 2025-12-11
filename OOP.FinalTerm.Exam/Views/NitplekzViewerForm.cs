@@ -20,14 +20,12 @@ namespace OOP.FinalTerm.Exam
             LoadAllMovies();
         }
 
-        /// <summary>
-        /// Creates filter buttons dynamically from the GenreHelper.AvailableGenres list.
-        /// </summary>
+    
         private void CreateGenreFilterButtons()
         {
             try
             {
-                // Find panel2
+               
                 Panel panel2 = null;
                 var panel1 = this.Controls.OfType<Panel>().FirstOrDefault(p => p.Name == "panel1");
                 if (panel1 != null)
@@ -44,7 +42,6 @@ namespace OOP.FinalTerm.Exam
 
                 panel2.Controls.Clear();
 
-                // Create "All Movies" button
                 var btnAllMovies = new Button
                 {
                     Text = "All",
@@ -66,7 +63,7 @@ namespace OOP.FinalTerm.Exam
 
                 int yPosition = 45;
 
-                // Create genre filter buttons
+    
                 foreach (var genre in GenreHelper.AvailableGenres)
                 {
                     var btnGenre = new Button
@@ -105,7 +102,7 @@ namespace OOP.FinalTerm.Exam
 
         private void AttachButtonEvents()
         {
-            // Events are attached in CreateGenreFilterButtons
+           
         }
 
         private void LoadAllMovies()
@@ -152,19 +149,18 @@ namespace OOP.FinalTerm.Exam
                 return;
             }
 
-            // Calculate the number of items per row based on panel width
-            // MovieControl width is 250 pixels
+           
             int movieControlWidth = 250;
             int movieControlHeight = 300;
             int padding = 15;
             int itemSpacing = 10;
             
-            // Available width for movies
-            int availableWidth = movieListPanel.Width - (padding * 2) - 17; // 17 for scrollbar
+           
+            int availableWidth = movieListPanel.Width - (padding * 2) - 17; 
             
-            // Calculate items per row (3-4 items max)
+         
             int itemsPerRow = availableWidth / (movieControlWidth + itemSpacing);
-            itemsPerRow = Math.Max(1, Math.Min(itemsPerRow, 4)); // Min 1, Max 4 items per row
+            itemsPerRow = Math.Max(1, Math.Min(itemsPerRow, 4)); 
 
             int controlCount = 0;
 
@@ -177,19 +173,18 @@ namespace OOP.FinalTerm.Exam
 
                 controlCount++;
 
-                // Force new row after every itemsPerRow items (optional visual separator)
-                // This is handled automatically by FlowLayoutPanel with WrapContents = true
+              
             }
         }
 
         private void btnSettings_Click(object sender, EventArgs e)
         {
-            const string correctCode = "1234"; // Change to your desired access code
+            const string correctCode = "1234";
             string userInput = PromptForAccessCode();
 
             if (string.IsNullOrEmpty(userInput))
             {
-                return; // User cancelled
+                return; 
             }
 
             if (userInput == correctCode)
@@ -199,7 +194,7 @@ namespace OOP.FinalTerm.Exam
                 var settingsForm = new SettingsForm(_movieRepository);
                 settingsForm.ShowDialog();
                 
-                // Auto-refresh the movie list after settings form closes
+              
                 LoadAllMovies();
             }
             else
@@ -350,10 +345,7 @@ namespace OOP.FinalTerm.Exam
         }
     }
 
-    /// <summary>
-    /// Helper class to customize scrollbar appearance for WinForms controls.
-    /// Provides Netflix-themed thin scrollbars that appear on hover.
-    /// </summary>
+ 
     public static class ScrollbarCustomizer
     {
         private const int SB_HORZ = 0;
@@ -384,19 +376,14 @@ namespace OOP.FinalTerm.Exam
             public int nTrackPos;
         }
 
-        /// <summary>
-        /// Applies Netflix-themed scrollbar styling to a control with hover effect.
-        /// </summary>
-        /// <param name="control">The control to apply scrollbar styling to</param>
-        /// <param name="netflixRed">Netflix red color (default: RGB 221, 0, 0)</param>
+        
         public static void ApplyNetflixScrollbar(Control control, Color? netflixRed = null)
         {
             netflixRed ??= Color.FromArgb(221, 0, 0);
 
-            // Set scrollbar width to thin (8 pixels)
+          
             SetScrollbarWidth(control.Handle, 8);
 
-            // Add hover event handlers for visual feedback
             control.MouseEnter += (s, e) =>
             {
                 if (control is Panel or FlowLayoutPanel)
@@ -414,29 +401,23 @@ namespace OOP.FinalTerm.Exam
             };
         }
 
-        /// <summary>
-        /// Sets the width of the vertical scrollbar.
-        /// </summary>
-        /// <param name="hwnd">Handle to the control</param>
-        /// <param name="width">Width in pixels (thin: 8-10, normal: 15-17)</param>
+       
         private static void SetScrollbarWidth(IntPtr hwnd, int width)
         {
             try
             {
-                // Use Windows API to set scrollbar width
+              
                 int result = NativeMethods.SetWindowPos(hwnd, IntPtr.Zero, 0, 0, 0, 0,
                     NativeMethods.SWP_NOSIZE | NativeMethods.SWP_NOMOVE | NativeMethods.SWP_NOZORDER);
             }
             catch
             {
-                // Silently fail if native methods not available
+               
             }
         }
     }
 
-    /// <summary>
-    /// Native Windows API methods for scrollbar customization.
-    /// </summary>
+   
     internal static class NativeMethods
     {
         internal const int SWP_NOSIZE = 0x0001;
@@ -458,7 +439,6 @@ namespace OOP.FinalTerm.Exam
         [DllImport("user32.dll")]
         internal static extern long GetWindowLong(IntPtr hWnd, int nIndex);
 
-        // Window message constants
         internal const int WM_VSCROLL = 0x0115;
         internal const int WM_HSCROLL = 0x0114;
         internal const int GWL_STYLE = -16;

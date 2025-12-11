@@ -19,10 +19,7 @@ namespace OOP.FinalTerm.Exam
             InitializeComponent();
         }
 
-        /// <summary>
-        /// Populates the MovieControl with data from a MovieModel instance.
-        /// </summary>
-        /// <param name="movie">The MovieModel containing the movie data</param>
+  
         public void SetMovieData(MovieModel movie)
         {
             _currentMovie = movie;
@@ -31,14 +28,11 @@ namespace OOP.FinalTerm.Exam
             lblMovieYear.Text = movie.DateReleased.Year.ToString();
             lblRating.Text = $"Rating: {movie.Ratings}/5";
 
-            // Load and display the cover image from base64
+          
             LoadCoverImage(movie);
         }
 
-        /// <summary>
-        /// Loads the cover image from the movie's base64 encoded Cover property.
-        /// </summary>
-        /// <param name="movie">The MovieModel containing the base64 image data</param>
+      
         private void LoadCoverImage(MovieModel movie)
         {
             try
@@ -67,10 +61,7 @@ namespace OOP.FinalTerm.Exam
             }
         }
 
-        /// <summary>
-        /// Gets the current movie model associated with this control.
-        /// </summary>
-        /// <returns>The MovieModel instance</returns>
+   
         public MovieModel GetMovieData()
         {
             return _currentMovie;

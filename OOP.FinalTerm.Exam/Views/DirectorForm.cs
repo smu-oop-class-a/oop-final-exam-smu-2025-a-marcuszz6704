@@ -12,9 +12,7 @@ namespace OOP.FinalTerm.Exam.Views
         private readonly Color _darkBackground = Color.FromArgb(20, 20, 20);
         private readonly Color _hoverColor = Color.FromArgb(50, 50, 50);
 
-        /// <summary>
-        /// Constructor for adding a new director
-        /// </summary>
+      
         public DirectorForm(IDirectorRepository directorRepository)
         {
             InitializeComponent();
@@ -23,11 +21,9 @@ namespace OOP.FinalTerm.Exam.Views
             _directorRepository = directorRepository;
         }
 
-        /// <summary>
-        /// Constructor for editing an existing director
-        /// </summary>
         public DirectorForm(DirectorModel director)
         {
+
             InitializeComponent();
             _director = director;
             lblTitle.Text = "Edit Director";
@@ -39,41 +35,46 @@ namespace OOP.FinalTerm.Exam.Views
         }
         #endregion
 
-        /// <summary>
-        /// Returns the Director object with user-entered data
-        /// TODO: Students will implement this method to map form controls to Director properties
-        /// </summary>
+      
         public DirectorModel GetDirector()
         {
-            // TODO: Map form controls to _director properties
-            // Example:
-            // _director.FirstName = txtFirstName.Text;
-            // _director.LastName = txtLastName.Text;
-            // _director.Genres = txtGenres.Text;
-            // _director.TotalMoviesCreated = (int)numTotalMovies.Value;
 
+            _director.FirstName = txtFirstName.Text;
+            _director.LastName = txtLastName.Text;
+            _director.Genres = txtGenres.Text;
+            _director.TotalMoviesCreated = (int)numTotalMovies.Value;
             return _director;
+
+      
         }
 
         private void BtnSave_Click(object sender, EventArgs e)
         {
-            // TODO: Students will implement validation here
-            // Example validation:
-            // if (string.IsNullOrWhiteSpace(txtFirstName.Text))
-            // {
-            //     MessageBox.Show("First Name is required.", "Validation Error", 
-            //         MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            //     txtFirstName.Focus();
-            //     return;
-            // }
-            //
-            // if (string.IsNullOrWhiteSpace(txtLastName.Text))
-            // {
-            //     MessageBox.Show("Last Name is required.", "Validation Error", 
-            //         MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            //     txtLastName.Focus();
-            //     return;
-            // }
+
+            if (string.IsNullOrWhiteSpace(txtFirstName.Text))
+            {
+                MessageBox.Show("First Name is required.", "Validation Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtFirstName.Focus();
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtLastName.Text))
+            {
+                MessageBox.Show("Last Name is required.", "Validation Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtLastName.Focus();
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(txtGenres.Text))
+            {
+                MessageBox.Show("Genres is required.", "Validation Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtGenres.Focus();
+                return;
+            }
+           
+
 
             _directorRepository.AddDirector(GetDirector());
 
@@ -81,16 +82,14 @@ namespace OOP.FinalTerm.Exam.Views
             this.Close();
         }
 
-        #region methods [DON'T TOUCH]
-        /// <summary>
-        /// Applies Netflix theme colors to the form
-        /// </summary>
+
+     
         private void ApplyNetflixTheme()
         {
             this.BackColor = Color.FromArgb(30, 30, 30);
             this.ForeColor = Color.White;
 
-            // Apply theme to buttons
+ 
             foreach (Control control in GetAllControls(this))
             {
                 if (control is Button button)
@@ -140,9 +139,7 @@ namespace OOP.FinalTerm.Exam.Views
             }
         }
 
-        /// <summary>
-        /// Helper method to recursively get all controls
-        /// </summary>
+
         private IEnumerable<Control> GetAllControls(Control container)
         {
             foreach (Control control in container.Controls)
@@ -154,6 +151,6 @@ namespace OOP.FinalTerm.Exam.Views
                 }
             }
         }
-        #endregion
+     
     }
 }
