@@ -1,5 +1,5 @@
 # Part 1: Essay
-[![PDF Preview](exam_preview.jpg)](./OOP%20-%20Final%20Term%20Exam.pdf)
+## 👉👉👉 [Essay Questions](https://heartwarming-walrus.static.domains/)
 
  
 # Part 2: Hands-on | Nitplekz Movie Viewer - Director Management System
